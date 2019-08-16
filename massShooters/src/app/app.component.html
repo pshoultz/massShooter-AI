@@ -8,8 +8,7 @@
             (initError)="handleInitError($event)"
     ></webcam>
     <br/>
-    <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
-    <button class="actionBtn" (click)="toggleWebcam();">Toggle Webcam</button>
+    <button class="actionBtn" (click)="triggerSnapshot();">start</button>
   </div>
 </div>
 
@@ -22,13 +21,5 @@
 <ul *ngFor="let error of errors">
   <li>{{error | json}}</li>
 </ul>
-
-<h2>Like this project on GitHub:</h2>
-<ul class="links">
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/basst314/ngx-webcam">Ngx-Webcam / GitHub</a></h2>
-  </li>
-</ul>
-
 
 <router-outlet></router-outlet>

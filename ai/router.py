@@ -1,6 +1,7 @@
 from fastai.imports import *
 from fastai.vision import *
 from flask import Flask
+from flask import request, jsonify
 
 app = Flask(__name__)
 path = Path("./")
@@ -12,3 +13,11 @@ def hello_world():
     pred_class,pred_idx,outputs = learn.predict(img)
     print(pred_class)
     return "done"
+
+@app.route('/detect', methods=['GET','POST'])
+def detect():
+     print("detect route hit")
+     data = request.data
+     print(data)
+     return "detect"
+

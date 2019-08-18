@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable'
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -44,16 +44,18 @@ export class AppComponent implements OnInit {
 
     public triggerSnapshot(): void {
         this.trigger.next();
+        //var content: HttpHeaders =  new HttpHeaders({
+        //    'Content-Type':  'application/json'
+        //});
         //this.http.get("http://127.0.0.1:5000/");
         this.http.post(
             'http://127.0.0.1:5000/detect',
             JSON.stringify({
-                //image: this.webcamImage.imageAsBase64,
-                image: "asdfasdfasdf"
+                image: this.webcamImage.imageAsBase64,
+                //image: "asdfasdfasdf"
             })
         ).subscribe(data => {
-            this.data = data;
-            console.log(this.data);
+            console.log(data);
         });
     }
 
@@ -73,7 +75,7 @@ export class AppComponent implements OnInit {
     }
 
     public handleImage(webcamImage: WebcamImage): void {
-      console.info('received webcam image', webcamImage);
+      //console.info('received webcam image', webcamImage);
       this.webcamImage = webcamImage;
     }
 

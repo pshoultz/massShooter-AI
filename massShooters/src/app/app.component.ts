@@ -43,10 +43,26 @@ export class AppComponent implements OnInit {
     }
 
     public triggerSnapshot(): void {
+        //this.start();
+        setTimeout(() => {
+            this.trigger.next();
+            //this.http.get("http://127.0.0.1:5000/");
+            this.http.post(
+                'http://127.0.0.1:5000/detect',
+                JSON.stringify({
+                    image: this.webcamImage.imageAsBase64,
+                    //image: "asdfasdfasdf"
+                })
+            ).subscribe(data => {
+                this.data = data;
+                console.log(data);
+                this.triggerSnapshot();
+            });
+        },1000);
+    }
+
+    private start(): void{
         this.trigger.next();
-        //var content: HttpHeaders =  new HttpHeaders({
-        //    'Content-Type':  'application/json'
-        //});
         //this.http.get("http://127.0.0.1:5000/");
         this.http.post(
             'http://127.0.0.1:5000/detect',
@@ -57,6 +73,7 @@ export class AppComponent implements OnInit {
         ).subscribe(data => {
             console.log(data);
         });
+
     }
 
     public toggleWebcam(): void {
